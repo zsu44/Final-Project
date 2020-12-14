@@ -14,9 +14,14 @@
 
   import * as THREE from './js/build/three.module.js'
   import { OrbitControls } from './js/examples/jsm/controls/OrbitControls.js'
+  import { MTLLoader } from "./js/examples/jsm/loaders/MTLLoader.js";
+  import { OBJLoader2 } from "/js/examples/jsm/loaders/OBJLoader2.js"; 
+  import { MtlObjBridge } from "./js/examples/jsm/loaders/MtlObjBridge.js";
 
     let scene, camera, renderer, cubes, clock;
     let meshFloor, ambientLight, light, lightMesh;
+
+
 
     function init() {
       
@@ -48,9 +53,24 @@
 
       cubes = [];
         
+
         const loader = new THREE.TextureLoader();
         const texture = loader.load('./Marble.jpeg');
         const material = new THREE.MeshPhongMaterial({ map: texture }); //map one image to every face
+
+        //Loads  mtf and obj files
+        const mtlLoader = new MTLLoader();
+      mtlLoader.load('https://raw.githubusercontent.com/zsu44/Final-Project/main/objs/gw_bust/gw_bust-bust-150k-4096.mtl', (mtlParseResult) => {
+        const objLoader = new OBJLoader2();
+        const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+        objLoader.addMaterials(materials); 
+        
+        objLoader.load('https://raw.githubusercontent.com/zsu44/Final-Project/main/objs/gw_bust/npg_70_4_bust-hires_unwrapped-150k-unwrapped.obj', (root) => {
+          scene.add(root);
+      
+        });
+    
+      });
 
         let mesh = new THREE.Mesh(
           new THREE.BoxGeometry(1.5, 2, 1),
