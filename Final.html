@@ -18,7 +18,7 @@
   import { OBJLoader2 } from "/js/examples/jsm/loaders/OBJLoader2.js"; 
   import { MtlObjBridge } from "./js/examples/jsm/loaders/MtlObjBridge.js";
 
-    let scene, camera, renderer, cubes, clock;
+    let scene, camera, renderer, cubes, clock, bustOBJ;
     let meshFloor, ambientLight, light, lightMesh;
 
 
@@ -70,6 +70,8 @@
         objLoader.load('https://raw.githubusercontent.com/zsu44/Final-Project/main/objs/gw_bust/npg_70_4_bust-hires_unwrapped-150k-unwrapped.obj', (root) => {
           scene.add(root);
       
+      bustOBJ = root; 
+
         });
     
       });
