@@ -55,9 +55,11 @@
         
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('./Marble.jpeg');
+        const texture = loader.load('./Final/Marble.jpeg');
+	const texture2 = loader.load('./Final/wood_floor.jpg');
         const material = new THREE.MeshPhongMaterial({ map: texture }); //map one image to every face
-
+	const material2 = new.THREE.MeshPhongMaterial({ map: texture }};
+						      
         //Loads  mtf and obj files
         const mtlLoader = new MTLLoader();
       mtlLoader.load('https://raw.githubusercontent.com/zsu44/Final-Project/main/objs/gw_bust/gw_bust-bust-150k-4096.mtl', (mtlParseResult) => {
@@ -102,7 +104,7 @@
 
       meshFloor = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 20, 20, 20),
-        new THREE.MeshPhongMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+        material2
       );
 
        meshFloor.rotation.x = - Math.PI / 2.0;
