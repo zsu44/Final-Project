@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    <title>intro</title>
+    <title>Bust Museum Display</title>
     
 	</head>
 	<body>
-    
+  <h1>Bust Museum Display by Jesse Park, Thea Gamez, Jerry (Zhiheng) Su</h1>
+  <p>click w for red light, a for green light, s for yellow light, d for blue light. click r to reset to default</p>
    <script type="module">
  
  //point light shadow code modified from :
@@ -41,7 +42,6 @@
 
       // Enable Shadows in the Renderer
       renderer.shadowMap.enabled = true;
-      //renderer.shadowMap.type = THREE.BasicShadowMap;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -57,8 +57,8 @@
         
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('./Marble.jpeg');
-        const texture2 = loader.load('./wood_floor.jpg');
+        const texture = loader.load('./Final/Marble.jpeg');
+        const texture2 = loader.load('./Final/wood_floor.jpg');
         const material = new THREE.MeshPhongMaterial({ map: texture }); //map one image to every face
         const material2 = new THREE.MeshPhongMaterial({ map: texture2});
 
@@ -75,7 +75,6 @@
       bustOBJ = root; 
       bustOBJ.scale.set(0.003,0.003,0.003);
       bustOBJ.position.set(-2.05, 1.235, -3.66); 
-      //bustOBJ.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2));
         });
       });
 
@@ -130,19 +129,19 @@
       function onKeyDown(event) {
         var keyCode = event.key;
         console.log(keyCode);
-        if (keyCode == "w"){
+        if (keyCode == "w"){ // click w for red light
           light.color.setHex(0xFF0000);
         }
-        else if(keyCode == "a"){
+        else if(keyCode == "a"){ // click a for green light
           light2.color.setHex(0x008000);
         }
-        else if(keyCode == "s"){
-          light3.color.setHex(0x800080);
+        else if(keyCode == "s"){ // click s for yellow light
+          light3.color.setHex(0xFFFF00);
         }
-        else if(keyCode == 'd'){
+        else if(keyCode == 'd'){ // click d for blue light 
           light4.color.setHex(0x0000ff);
         }
-        else if (keyCode == 'r'){
+        else if (keyCode == 'r'){ // click r to reset to default light
           light.color.setHex(0xffffff);
           light2.color.setHex(0x66b2ff);
           light3.color.setHex(0xff9933);
@@ -151,7 +150,7 @@
       }
       document.onkeydown = onKeyDown;
 
-      light2 = new THREE.PointLight(0x66b2ff, 0.7, 15);
+      light2 = new THREE.PointLight(0x66b2ff, 0.7, 15); 
       light2.position.set(0, 6, -3);
       light2.castShadow = true;
 
@@ -191,10 +190,6 @@
     
     function animate() {
       requestAnimationFrame(animate);
-
-      // console.log(camera);
-      //camera.position.set(1,3,-7); //locks camera in front of obj
-      //camera.position.y = Math.sin(clock.getElapsedTime() / 20)* 2;
       
       if (camera.position.y >= 0){
         camera.position.y = Math.sin(clock.getElapsedTime() / 20)* 4;
@@ -206,8 +201,6 @@
       camera.lookAt( scene.position );
         
       renderer.render(scene, camera);
-      // console.log (camera.position.y);
-      // console.log (clock.elapsedTime);
     
       
   }
